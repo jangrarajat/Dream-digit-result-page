@@ -1,0 +1,74 @@
+body {
+  margin: 0;
+  font-family: Arial;
+  background: #FFF9E0;
+  /* bg-[#FFF9E0] */
+
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-around;
+  background:#E2C98F;
+  padding: 10px;
+}
+
+.navbar button {
+  background: black;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+}
+
+.header {
+  background: #E2C98F;
+  text-align: center;
+  padding: 10px;
+}
+
+.header h1 {
+  margin: 0;
+}
+
+.result-box {
+  background: #ddd;
+  text-align: center;
+  padding: 20px;
+}
+
+.pink {
+  color: hotpink;
+}
+
+.green {
+  color: green;
+}
+
+.game-time {
+  background: #5c8ea1;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+.footer {
+  background: orange;
+  text-align: center;
+  padding: 10px;
+}
+
+/* 📱 Mobile Responsive */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+  }
+
+  .navbar button {
+    margin: 5px 0;
+  }
+
+  .result-box h1 {
+    font-size: 20px;
+  }
+}
