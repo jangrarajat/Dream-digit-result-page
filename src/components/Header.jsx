@@ -287,7 +287,7 @@ export default function Header() {
 
           {/* Live Result Card */}
           <div className="mt-5 border-4 text-white border-white bg-blue-800 rounded-3xl p-5 pb-1 shadow-lg text-center">
-            <div className="bg-gradient-to-r from-orange-400 to-red-500 text-white px-4 py-2 gap-1 flex items-center justify-center rounded-full font-semibold">
+            <div className="bg-gradient-to-r from-orange-400 to-red-500 text-white px-4 py-1 gap-1 flex items-center justify-center rounded-full font-semibold">
               <div className="flex items-center gap-2">
                 <span className="relative flex h-3 w-3">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
@@ -298,17 +298,17 @@ export default function Header() {
               <p>LATEST LIVE RESULT</p>
             </div>
 
-            <h2 className="font-bold mt-6 text-white text-xl">
+            <h2 className="font-bold mt-4 text-white text-sm">
               DREAM MORNING
             </h2>
-            <h1 className="text-6xl font-extrabold mt-3 text-white">
+            <h1 className="text-4xl font-extrabold mt-3 text-white ">
               {getCurrentLiveNumber()}
             </h1>
-            {lastUpdate && (
+            {/* {lastUpdate && (
               <p className="text-xs mt-2 text-gray-300">
                 Last updated: {lastUpdate.toLocaleTimeString()}
               </p>
-            )}
+            )} */}
           </div>
 
           {/* Morning Slot - 06:00 AM */}
@@ -316,7 +316,7 @@ export default function Header() {
             <div className="bg-gradient-to-r from-orange-400 to-red-500 text-white text-center py-2 font-semibold text-lg">
               Dream Morning - 06:00 AM
             </div>
-            <div className="bg-blue-800 text-white border-white flex justify-between px-8 py-4">
+            <div className="bg-blue-800 text-white border-white flex justify-between px-8 py-2">
               <div className="text-center">
                 <p className="text-sm mb-1">Yesterday</p>
                 <h1 className="text-white text-5xl font-bold">
