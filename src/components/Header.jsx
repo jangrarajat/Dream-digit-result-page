@@ -301,7 +301,7 @@ export default function Header() {
             <h2 className="font-bold mt-4 text-white text-sm">
               DREAM MORNING
             </h2>
-            <h1 className="text-4xl font-extrabold mt-3 text-white ">
+            <h1 className="text-6xl font-extrabold mt-3 text-white ">
               {getCurrentLiveNumber()}
             </h1>
             {/* {lastUpdate && (
@@ -319,14 +319,14 @@ export default function Header() {
             <div className="bg-blue-800 text-white border-white flex justify-between px-8 py-2">
               <div className="text-center">
                 <p className="text-sm mb-1">Yesterday</p>
-                <h1 className="text-white text-5xl font-bold">
+                <h1 className="text-white text-3xl font-bold">
                   {getYesterdayNumber("index1")}
                 </h1>
               </div>
               <div className="text-center">
                 <p className="text-sm mb-1">Today</p>
                 {isSlotFilled("index1") ? (
-                  <h1 className="text-white text-5xl font-bold animate-pulse">
+                  <h1 className="text-white text-3xl font-bold animate-pulse">
                     {getTodayNumber("index1")}
                   </h1>
                 ) : (
@@ -348,14 +348,14 @@ export default function Header() {
                 <div className="bg-blue-800 text-white flex justify-between px-8 py-4">
                   <div className="text-center">
                     <p className="text-sm mb-1">Yesterday</p>
-                    <h1 className="text-white text-5xl font-bold">
+                    <h1 className="text-white text-3xl font-bold">
                       {getYesterdayNumber(slot.key)}
                     </h1>
                   </div>
                   <div className="text-center">
                     <p className="text-sm mb-1">Today</p>
                     {isSlotFilled(slot.key) ? (
-                      <h1 className="text-white text-5xl font-bold animate-pulse">
+                      <h1 className="text-white text-3xl font-bold animate-pulse">
                         {getTodayNumber(slot.key)}
                       </h1>
                     ) : (
