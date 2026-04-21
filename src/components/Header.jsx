@@ -117,8 +117,8 @@ export default function Header() {
           </div>
 
           {/* 🔥 RESULT CARD */}
-          <div className="mt-5 border-4 text-white border-white bg-blue-800 rounded-3xl p-5  shadow-lg text-center">
-            <div className="bg-gradient-to-r flex items-center justify-center  from-orange-400 to-red-500 text-white px-4 py-2 rounded-full  font-semibold">
+          <div className="mt-5 border-4 text-white border-white bg-blue-800 rounded-3xl p-5 pb-1 shadow-lg text-center">
+            <div className="bg-gradient-to-r  from-orange-400 to-red-500 text-white px-4 py-2 gap-1 flex items-center justify-center  rounded-full  font-semibold">
 
               <div className="flex items-center gap-2">
                 <span className="relative flex h-3 w-3">
@@ -130,18 +130,18 @@ export default function Header() {
              <p> LATEST LIVE RESULT</p>
             </div>
 
-            <h2 className=" text-2xl font-bold mt-6">
+            <h2 className="  font-bold mt-6">
               DREAM MORNING
             </h2>
 
-            <h1 className=" text-7xl font-extrabold mt-3">
+            <h1 className=" text-5xl font-extrabold mt-3">
               31
             </h1>
           </div>
 
           {/* 🔥 YESTERDAY / TODAY */}
           <div className="mt-6 rounded-3xl border-4 border-white  overflow-hidden shadow-lg">
-            <div className="bg-red-900 text-white text-center py-3 font-semibold">
+            <div className="bg-gradient-to-r  from-orange-400 to-red-500 text-white text-center py-1 font-semibold">
               Dream Morning - 06:00 AM
             </div>
 
@@ -164,7 +164,7 @@ export default function Header() {
             {extraData.map((item, i) => (
               <div key={i} className="rounded-3xl border-4 border-white overflow-hidden shadow-xl">
 
-                <div className="bg-red-900 text-white text-center py-3 font-semibold">
+                <div className="bg-gradient-to-r  from-orange-400 to-red-500 text-white text-center py-1 font-semibold">
                   {item.title}
                 </div>
 
@@ -191,7 +191,7 @@ export default function Header() {
             ))}
 
             {/* 🔥 MONTHLY RESULT BOX */}
-            <div className="bg-red-700 border-4 border-white-500 rounded-3xl py-5 shadow-xl">
+            <div className="bg-gradient-to-r  from-orange-400 to-red-500 cursor-pointer  hover:scale-105 duration-300 active:scale-95 border-4 border-white-500 rounded-3xl py-5 shadow-xl">
               <h2 className="text-xl font-bold text-white">
                 📊 Monthly Result Chart
               </h2>
