@@ -301,7 +301,7 @@ export default function Header() {
             <h2 className="font-bold mt-4 text-white text-sm">
               DREAM MORNING
             </h2>
-            <h1 className="text-6xl font-extrabold mt-3 text-white ">
+            <h1 className="text-6xl font-extrabold mt-3 text-white animate-pulse ">
               {getCurrentLiveNumber()}
             </h1>
             {/* {lastUpdate && (
@@ -312,21 +312,21 @@ export default function Header() {
           </div>
 
           {/* Morning Slot - 06:00 AM */}
-          <div className="mt-6 rounded-3xl border-4 border-white overflow-hidden shadow-lg">
+          <div className="mt-4 rounded-3xl border-4 border-white overflow-hidden shadow-lg">
             <div className="bg-gradient-to-r from-orange-400 to-red-500 text-white text-center py-2 font-semibold text-lg">
               Dream Morning - 06:00 AM
             </div>
-            <div className="bg-blue-800 text-white border-white flex justify-between px-8 py-2">
+            <div className="bg-blue-800 text-white border-white flex justify-between px-8 py-1">
               <div className="text-center">
                 <p className="text-sm mb-1">Yesterday</p>
-                <h1 className="text-white text-3xl font-bold">
+                <h1 className="text-white text-2xl font-bold">
                   {getYesterdayNumber("index1")}
                 </h1>
               </div>
               <div className="text-center">
                 <p className="text-sm mb-1">Today</p>
                 {isSlotFilled("index1") ? (
-                  <h1 className="text-white text-3xl font-bold animate-pulse">
+                  <h1 className="text-white text-2xl font-bold  ">
                     {getTodayNumber("index1")}
                   </h1>
                 ) : (
@@ -339,23 +339,23 @@ export default function Header() {
           </div>
 
           {/* Other Slots - Day, Evening, Night */}
-          <div className="mt-6 space-y-6">
+          <div className="mt-4 space-y-4">
             {extraDataSlots.map((slot, i) => (
               <div key={i} className="rounded-3xl border-4 border-white overflow-hidden shadow-xl">
                 <div className="bg-gradient-to-r from-orange-400 to-red-500 text-white text-center py-2 font-semibold text-lg">
                   {slot.title}
                 </div>
-                <div className="bg-blue-800 text-white flex justify-between px-8 py-4">
+                <div className="bg-blue-800 text-white flex justify-between px-8 py-1">
                   <div className="text-center">
                     <p className="text-sm mb-1">Yesterday</p>
-                    <h1 className="text-white text-3xl font-bold">
+                    <h1 className="text-white text-2xl font-bold">
                       {getYesterdayNumber(slot.key)}
                     </h1>
                   </div>
                   <div className="text-center">
                     <p className="text-sm mb-1">Today</p>
                     {isSlotFilled(slot.key) ? (
-                      <h1 className="text-white text-3xl font-bold animate-pulse">
+                      <h1 className="text-white text-2xl font-bold  ">
                         {getTodayNumber(slot.key)}
                       </h1>
                     ) : (
@@ -371,7 +371,7 @@ export default function Header() {
             {/* Monthly Result Box - Clickable */}
             <div 
               onClick={openMonthlyModal}
-              className="bg-gradient-to-r from-orange-400 to-red-500 cursor-pointer hover:scale-105 duration-300 active:scale-95 border-4 border-white rounded-3xl py-5 shadow-xl transition-transform"
+              className="bg-gradient-to-r from-orange-400 to-red-500 cursor-pointer hover:scale-105 duration-300 active:scale-95 border-4 border-white rounded-3xl py-3 shadow-xl transition-transform"
             >
               <h2 className="text-xl font-bold text-white">
                 📊 Monthly Result Chart
