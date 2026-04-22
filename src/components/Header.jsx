@@ -16,8 +16,10 @@ export default function Header() {
   const [selectedMonth, setSelectedMonth] = useState("");
   const [selectedYear, setSelectedYear] = useState("");
   const [filteredData, setFilteredData] = useState([]);
+  const [lastUpdatedIndex, setLastUpdatedIndex] = useState(null);
   const pollingInterval = useRef(null);
   const timeInterval = useRef(null);
+  const isMounted = useRef(true);
 
   // Extra data slots configuration
   const extraDataSlots = [
@@ -32,13 +34,76 @@ export default function Header() {
     "July", "August", "September", "October", "November", "December"
   ];
 
+  // Get title based on index
+  const getTitleByIndex = (index) => {
+    if (!index) return "DREAM MORNING";
+    switch(index) {
+      case "index1":
+        return "DREAM MORNING";
+      case "index2":
+        return "DREAM DAY";
+      case "index3":
+        return "DREAM EVENING";
+      case "index4":
+        return "DREAM NIGHT";
+      default:
+        return "DREAM MORNING";
+    }
+  };
+
+  // Get current live number based on last updated index
+  const getCurrentLiveNumber = () => {
+    if (!todayResults?.numbers) return "WAIT";
+    
+    // Agar koi index update hua hai toh us index ka number dikhao
+    if (lastUpdatedIndex && todayResults.numbers[lastUpdatedIndex]) {
+      const number = todayResults.numbers[lastUpdatedIndex];
+      if (number && number !== "WAIT" && number !== "") {
+        return number;
+      }
+    }
+    
+    // Agar koi update nahi hua ya index invalid hai toh last non-empty value dikhao
+    const numbers = todayResults.numbers;
+    const values = Object.values(numbers);
+    for (let i = values.length - 1; i >= 0; i--) {
+      if (values[i] && values[i] !== "WAIT" && values[i] !== "") {
+        return values[i];
+      }
+    }
+    return "WAIT";
+  };
+
   // Fetch today's results
   const fetchTodayResults = useCallback(async () => {
     try {
       const response = await fetch(`${API_BASE_URL}/results/today`);
       const data = await response.json();
-      if (data.success && data.data) {
-        setTodayResults(data.data);
+      if (isMounted.current && data.success && data.data) {
+        // Check which index was updated
+        setTodayResults(prevResults => {
+          if (prevResults && prevResults.numbers && data.data.numbers) {
+            const oldNumbers = prevResults.numbers;
+            const newNumbers = data.data.numbers;
+            
+            // Find which index changed
+            for (const key of ['index1', 'index2', 'index3', 'index4']) {
+              if (oldNumbers[key] !== newNumbers[key] && newNumbers[key] && newNumbers[key] !== "" && newNumbers[key] !== "WAIT") {
+                setLastUpdatedIndex(key);
+                break;
+              }
+            }
+          } else if (data.data.numbers) {
+            // First time loading, set last updated index to the last non-empty value
+            const numbers = data.data.numbers;
+            for (const key of ['index1', 'index2', 'index3', 'index4']) {
+              if (numbers[key] && numbers[key] !== "" && numbers[key] !== "WAIT") {
+                setLastUpdatedIndex(key);
+              }
+            }
+          }
+          return data.data;
+        });
         setLastUpdate(new Date());
       }
     } catch (error) {
@@ -51,7 +116,7 @@ export default function Header() {
     try {
       const response = await fetch(`${API_BASE_URL}/results/yesterday`);
       const data = await response.json();
-      if (data.success && data.data) {
+      if (isMounted.current && data.success && data.data) {
         setYesterdayResults(data.data);
       }
     } catch (error) {
@@ -65,7 +130,7 @@ export default function Header() {
     try {
       const response = await fetch(`${API_BASE_URL}/results/history`);
       const data = await response.json();
-      if (data.success && data.data) {
+      if (isMounted.current && data.success && data.data) {
         setHistoryData(data.data);
         // Set default filters
         const currentDate = new Date();
@@ -75,7 +140,9 @@ export default function Header() {
     } catch (error) {
       console.error("Error fetching history data:", error);
     } finally {
-      setHistoryLoading(false);
+      if (isMounted.current) {
+        setHistoryLoading(false);
+      }
     }
   }, []);
 
@@ -83,13 +150,17 @@ export default function Header() {
   const fetchAllData = useCallback(async () => {
     setLoading(true);
     await Promise.all([fetchTodayResults(), fetchYesterdayResults()]);
-    setLoading(false);
+    if (isMounted.current) {
+      setLoading(false);
+    }
   }, [fetchTodayResults, fetchYesterdayResults]);
 
   // Update current time
   useEffect(() => {
     timeInterval.current = setInterval(() => {
-      setCurrentTime(new Date());
+      if (isMounted.current) {
+        setCurrentTime(new Date());
+      }
     }, 1000);
 
     return () => {
@@ -101,16 +172,21 @@ export default function Header() {
 
   // Setup polling for real-time updates
   useEffect(() => {
+    isMounted.current = true;
+    
     // Initial fetch
     fetchAllData();
 
     // Poll every 5 seconds for real-time updates
     pollingInterval.current = setInterval(() => {
-      fetchTodayResults(); // Only poll today's results for live updates
+      if (isMounted.current) {
+        fetchTodayResults();
+      }
     }, 5000);
 
     // Cleanup on component unmount
     return () => {
+      isMounted.current = false;
       if (pollingInterval.current) {
         clearInterval(pollingInterval.current);
       }
@@ -139,21 +215,6 @@ export default function Header() {
       new Date(item.date).getFullYear().toString()
     ))];
     return years.sort().reverse();
-  };
-
-  // Get current live number (last added number from today)
-  const getCurrentLiveNumber = () => {
-    if (!todayResults?.numbers) return "WAIT";
-    
-    const numbers = todayResults.numbers;
-    // Get the last non-empty value
-    const values = Object.values(numbers);
-    for (let i = values.length - 1; i >= 0; i--) {
-      if (values[i] && values[i] !== "WAIT" && values[i] !== "") {
-        return values[i];
-      }
-    }
-    return "WAIT";
   };
 
   // Get today's number for a specific slot
@@ -279,13 +340,13 @@ export default function Header() {
             alt="Dream Digit Banner"
           />
 
-          {/* Date + Time - Mobile optimized */}
+          {/* Date + Time */}
           <div className="mt-4 border-2 md:border-4 border-purple-400 rounded-full px-4 md:px-6 py-2 md:py-3 flex justify-between bg-white shadow font-bold text-sm md:text-base">
             <span>{formatDate(currentTime)}</span>
             <span>{currentTime.toLocaleTimeString()}</span>
           </div>
 
-          {/* Live Result Card - Mobile optimized */}
+          {/* Live Result Card - Shows last updated index's number */}
           <div className="mt-4 md:mt-5 border-2 md:border-4 text-white border-white bg-blue-800 rounded-2xl md:rounded-3xl p-3 md:p-5 pb-1 shadow-lg text-center">
             <div className="bg-gradient-to-r from-orange-400 to-red-500 text-white px-3 md:px-4 py-1 gap-1 flex items-center justify-center rounded-full font-semibold text-xs md:text-sm">
               <div className="flex items-center gap-1 md:gap-2">
@@ -299,14 +360,14 @@ export default function Header() {
             </div>
 
             <h2 className="font-bold mt-2 md:mt-4 text-white text-xs md:text-sm">
-              DREAM MORNING
+              {getTitleByIndex(lastUpdatedIndex)}
             </h2>
             <h1 className="text-4xl md:text-6xl font-extrabold mt-2 md:mt-3 text-white animate-pulse">
               {getCurrentLiveNumber()}
             </h1>
           </div>
 
-          {/* Morning Slot - 06:00 AM - Mobile optimized */}
+          {/* Morning Slot - 06:00 AM */}
           <div className="mt-4 rounded-2xl md:rounded-3xl border-2 md:border-4 border-white overflow-hidden shadow-lg">
             <div className="bg-gradient-to-r from-orange-400 to-red-500 text-white text-center py-1.5 md:py-2 font-semibold text-sm md:text-lg">
               Dream Morning - 06:00 AM
@@ -333,7 +394,7 @@ export default function Header() {
             </div>
           </div>
 
-          {/* Other Slots - Day, Evening, Night - Mobile optimized */}
+          {/* Other Slots - Day, Evening, Night */}
           <div className="mt-4 space-y-4">
             {extraDataSlots.map((slot, i) => (
               <div key={i} className="rounded-2xl md:rounded-3xl border-2 md:border-4 border-white overflow-hidden shadow-lg">
