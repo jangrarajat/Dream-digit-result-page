@@ -279,58 +279,53 @@ export default function Header() {
             alt="Dream Digit Banner"
           />
 
-          {/* Date + Time */}
-          <div className="mt-4 border-4 border-purple-400 rounded-full px-6 py-3 flex justify-between bg-white shadow font-bold">
+          {/* Date + Time - Mobile optimized */}
+          <div className="mt-4 border-2 md:border-4 border-purple-400 rounded-full px-4 md:px-6 py-2 md:py-3 flex justify-between bg-white shadow font-bold text-sm md:text-base">
             <span>{formatDate(currentTime)}</span>
             <span>{currentTime.toLocaleTimeString()}</span>
           </div>
 
-          {/* Live Result Card */}
-          <div className="mt-5 border-4 text-white border-white bg-blue-800 rounded-3xl p-5 pb-1 shadow-lg text-center">
-            <div className="bg-gradient-to-r from-orange-400 to-red-500 text-white px-4 py-1 gap-1 flex items-center justify-center rounded-full font-semibold">
-              <div className="flex items-center gap-2">
-                <span className="relative flex h-3 w-3">
+          {/* Live Result Card - Mobile optimized */}
+          <div className="mt-4 md:mt-5 border-2 md:border-4 text-white border-white bg-blue-800 rounded-2xl md:rounded-3xl p-3 md:p-5 pb-1 shadow-lg text-center">
+            <div className="bg-gradient-to-r from-orange-400 to-red-500 text-white px-3 md:px-4 py-1 gap-1 flex items-center justify-center rounded-full font-semibold text-xs md:text-sm">
+              <div className="flex items-center gap-1 md:gap-2">
+                <span className="relative flex h-2 w-2 md:h-3 md:w-3">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 md:h-3 md:w-3 bg-green-500"></span>
                 </span>
-                <span className="text-green-400 text-sm font-semibold">LIVE</span>
+                <span className="animate-pulse text-green-400 text-xs md:text-sm font-semibold">LIVE</span>
               </div>
-              <p>LATEST LIVE RESULT</p>
+              <p className="text-xs md:text-sm">LATEST LIVE RESULT</p>
             </div>
 
-            <h2 className="font-bold mt-4 text-white text-sm">
+            <h2 className="font-bold mt-2 md:mt-4 text-white text-xs md:text-sm">
               DREAM MORNING
             </h2>
-            <h1 className="text-6xl font-extrabold mt-3 text-white animate-pulse ">
+            <h1 className="text-4xl md:text-6xl font-extrabold mt-2 md:mt-3 text-white animate-pulse">
               {getCurrentLiveNumber()}
             </h1>
-            {/* {lastUpdate && (
-              <p className="text-xs mt-2 text-gray-300">
-                Last updated: {lastUpdate.toLocaleTimeString()}
-              </p>
-            )} */}
           </div>
 
-          {/* Morning Slot - 06:00 AM */}
-          <div className="mt-4 rounded-3xl border-4 border-white overflow-hidden shadow-lg">
-            <div className="bg-gradient-to-r from-orange-400 to-red-500 text-white text-center py-2 font-semibold text-lg">
+          {/* Morning Slot - 06:00 AM - Mobile optimized */}
+          <div className="mt-4 rounded-2xl md:rounded-3xl border-2 md:border-4 border-white overflow-hidden shadow-lg">
+            <div className="bg-gradient-to-r from-orange-400 to-red-500 text-white text-center py-1.5 md:py-2 font-semibold text-sm md:text-lg">
               Dream Morning - 06:00 AM
             </div>
-            <div className="bg-blue-800 text-white border-white flex justify-between px-8 py-1">
+            <div className="bg-blue-800 text-white border-white flex justify-between px-4 md:px-8 py-1">
               <div className="text-center">
-                <p className="text-sm mb-1">Yesterday</p>
-                <h1 className="text-white text-2xl font-bold">
+                <p className="text-xs md:text-sm mb-0.5 md:mb-1">Yesterday</p>
+                <h1 className="text-white text-xl md:text-2xl font-bold">
                   {getYesterdayNumber("index1")}
                 </h1>
               </div>
               <div className="text-center">
-                <p className="text-sm mb-1">Today</p>
+                <p className="text-xs md:text-sm mb-0.5 md:mb-1">Today</p>
                 {isSlotFilled("index1") ? (
-                  <h1 className="text-white text-2xl font-bold  ">
+                  <h1 className="text-white text-xl md:text-2xl font-bold">
                     {getTodayNumber("index1")}
                   </h1>
                 ) : (
-                  <div className="bg-blue-600 text-white px-5 py-2 rounded-full mt-2 shadow">
+                  <div className="bg-blue-600 text-white px-3 md:px-5 py-1 md:py-2 rounded-full mt-1 md:mt-2 shadow text-xs md:text-base">
                     ⏳ WAIT
                   </div>
                 )}
@@ -338,28 +333,28 @@ export default function Header() {
             </div>
           </div>
 
-          {/* Other Slots - Day, Evening, Night */}
+          {/* Other Slots - Day, Evening, Night - Mobile optimized */}
           <div className="mt-4 space-y-4">
             {extraDataSlots.map((slot, i) => (
-              <div key={i} className="rounded-3xl border-4 border-white overflow-hidden shadow-xl">
-                <div className="bg-gradient-to-r from-orange-400 to-red-500 text-white text-center py-2 font-semibold text-lg">
+              <div key={i} className="rounded-2xl md:rounded-3xl border-2 md:border-4 border-white overflow-hidden shadow-lg">
+                <div className="bg-gradient-to-r from-orange-400 to-red-500 text-white text-center py-1.5 md:py-2 font-semibold text-sm md:text-lg">
                   {slot.title}
                 </div>
-                <div className="bg-blue-800 text-white flex justify-between px-8 py-1">
+                <div className="bg-blue-800 text-white flex justify-between px-4 md:px-8 py-1">
                   <div className="text-center">
-                    <p className="text-sm mb-1">Yesterday</p>
-                    <h1 className="text-white text-2xl font-bold">
+                    <p className="text-xs md:text-sm mb-0.5 md:mb-1">Yesterday</p>
+                    <h1 className="text-white text-xl md:text-2xl font-bold">
                       {getYesterdayNumber(slot.key)}
                     </h1>
                   </div>
                   <div className="text-center">
-                    <p className="text-sm mb-1">Today</p>
+                    <p className="text-xs md:text-sm mb-0.5 md:mb-1">Today</p>
                     {isSlotFilled(slot.key) ? (
-                      <h1 className="text-white text-2xl font-bold  ">
+                      <h1 className="text-white text-xl md:text-2xl font-bold">
                         {getTodayNumber(slot.key)}
                       </h1>
                     ) : (
-                      <div className="bg-blue-600 text-white px-5 py-2 rounded-full mt-2 shadow">
+                      <div className="bg-blue-600 text-white px-3 md:px-5 py-1 md:py-2 rounded-full mt-1 md:mt-2 shadow text-xs md:text-base">
                         ⏳ WAIT
                       </div>
                     )}
@@ -371,12 +366,12 @@ export default function Header() {
             {/* Monthly Result Box - Clickable */}
             <div 
               onClick={openMonthlyModal}
-              className="bg-gradient-to-r from-orange-400 to-red-500 cursor-pointer hover:scale-105 duration-300 active:scale-95 border-4 border-white rounded-3xl py-3 shadow-xl transition-transform"
+              className="bg-gradient-to-r from-orange-400 to-red-500 cursor-pointer hover:scale-105 duration-300 active:scale-95 border-2 md:border-4 border-white rounded-2xl md:rounded-3xl py-2 md:py-3 shadow-lg transition-transform"
             >
-              <h2 className="text-xl font-bold text-white">
+              <h2 className="text-base md:text-xl font-bold text-white">
                 📊 Monthly Result Chart
               </h2>
-              <p className="text-xs text-white mt-1">Click to view history</p>
+              <p className="text-xs text-white mt-0.5 md:mt-1">Click to view history</p>
             </div>
           </div>
         </div>
@@ -388,7 +383,7 @@ export default function Header() {
       </div>
 
       {/* Auto-refresh indicator */}
-      <div className="fixed bottom-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-xs shadow-lg z-40">
+      <div className="fixed bottom-4 right-4 bg-green-500 text-white px-2 md:px-3 py-0.5 md:py-1 rounded-full text-[10px] md:text-xs shadow-lg z-40">
         🔄 Live Updates Active
       </div>
 
@@ -399,19 +394,19 @@ export default function Header() {
             {/* Modal Header */}
             <div className="bg-gradient-to-r from-blue-800 to-purple-800 text-white p-4 rounded-t-2xl flex justify-between items-center">
               <div>
-                <h2 className="text-2xl font-bold">📊 Monthly Result Chart</h2>
-                <p className="text-sm opacity-90">Complete history of all results</p>
+                <h2 className="text-xl md:text-2xl font-bold">📊 Monthly Result Chart</h2>
+                <p className="text-xs md:text-sm opacity-90">Complete history of all results</p>
               </div>
               <button
                 onClick={closeModal}
-                className="text-white hover:text-gray-300 text-3xl font-bold"
+                className="text-white hover:text-gray-300 text-2xl md:text-3xl font-bold"
               >
                 ×
               </button>
             </div>
 
             {/* Modal Body */}
-            <div className="p-6 overflow-y-auto max-h-[calc(90vh-120px)]">
+            <div className="p-4 md:p-6 overflow-y-auto max-h-[calc(90vh-120px)]">
               {/* Filters */}
               <div className="mb-6 flex gap-4 flex-wrap">
                 <div className="flex-1 min-w-[150px]">
@@ -443,27 +438,27 @@ export default function Header() {
               {/* Statistics */}
               {filteredData.length > 0 && (
                 <div className="mb-6 bg-gradient-to-r from-blue-50 to-purple-50 p-4 rounded-lg">
-                  <h3 className="font-bold text-lg mb-2">Statistics for {selectedMonth} {selectedYear}</h3>
+                  <h3 className="font-bold text-base md:text-lg mb-2">Statistics for {selectedMonth} {selectedYear}</h3>
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                     <div className="text-center">
-                      <p className="text-sm text-gray-600">Total Results</p>
-                      <p className="text-2xl font-bold text-blue-600">{filteredData.length}</p>
+                      <p className="text-xs md:text-sm text-gray-600">Total Results</p>
+                      <p className="text-xl md:text-2xl font-bold text-blue-600">{filteredData.length}</p>
                     </div>
                     <div className="text-center">
-                      <p className="text-sm text-gray-600">Complete Days</p>
-                      <p className="text-2xl font-bold text-green-600">
+                      <p className="text-xs md:text-sm text-gray-600">Complete Days</p>
+                      <p className="text-xl md:text-2xl font-bold text-green-600">
                         {filteredData.filter(d => d.isComplete).length}
                       </p>
                     </div>
                     <div className="text-center">
-                      <p className="text-sm text-gray-600">Partial Days</p>
-                      <p className="text-2xl font-bold text-orange-600">
+                      <p className="text-xs md:text-sm text-gray-600">Partial Days</p>
+                      <p className="text-xl md:text-2xl font-bold text-orange-600">
                         {filteredData.filter(d => !d.isComplete && d.savedCount > 0).length}
                       </p>
                     </div>
                     <div className="text-center">
-                      <p className="text-sm text-gray-600">Total Numbers</p>
-                      <p className="text-2xl font-bold text-purple-600">
+                      <p className="text-xs md:text-sm text-gray-600">Total Numbers</p>
+                      <p className="text-xl md:text-2xl font-bold text-purple-600">
                         {filteredData.reduce((sum, d) => sum + (d.savedCount || 0), 0)}
                       </p>
                     </div>
@@ -484,14 +479,14 @@ export default function Header() {
               ) : (
                 <div className="overflow-x-auto">
                   <table className="w-full border-collapse">
-                    <thead className="sticky top-0 bg-gradient-to-r from-blue-800 to-purple-800 text-white">
+                    <thead className="sticky top-0 bg-gradient-to-r from-blue-800 to-purple-800 text-white text-sm md:text-base">
                       <tr>
-                        <th className="p-3 text-left border">Date</th>
-                        <th className="p-3 text-center border">Morning<br/>06:00 AM</th>
-                        <th className="p-3 text-center border">Day<br/>05:00 PM</th>
-                        <th className="p-3 text-center border">Evening<br/>08:00 PM</th>
-                        <th className="p-3 text-center border">Night<br/>11:00 PM</th>
-                        <th className="p-3 text-center border">Status</th>
+                        <th className="p-2 md:p-3 text-left border">Date</th>
+                        <th className="p-2 md:p-3 text-center border">Morning<br/>06:00 AM</th>
+                        <th className="p-2 md:p-3 text-center border">Day<br/>05:00 PM</th>
+                        <th className="p-2 md:p-3 text-center border">Evening<br/>08:00 PM</th>
+                        <th className="p-2 md:p-3 text-center border">Night<br/>11:00 PM</th>
+                        <th className="p-2 md:p-3 text-center border">Status</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -502,11 +497,11 @@ export default function Header() {
                             index % 2 === 0 ? 'bg-white' : 'bg-gray-50'
                           }`}
                         >
-                          <td className="p-3 font-semibold text-gray-800 border">
+                          <td className="p-2 md:p-3 font-semibold text-gray-800 border text-sm md:text-base">
                             {formatDisplayDate(item.date)}
                           </td>
-                          <td className="p-3 text-center text-2xl font-bold border">
-                            <span className={`inline-block w-12 h-12 flex items-center justify-center rounded-full ${
+                          <td className="p-2 md:p-3 text-center border">
+                            <span className={`inline-block w-8 h-8 md:w-12 md:h-12 flex items-center justify-center rounded-full text-sm md:text-2xl font-bold ${
                               item.numbers?.index1 && item.numbers.index1 !== "" 
                                 ? 'bg-green-100 text-green-700' 
                                 : 'bg-gray-100 text-gray-400'
@@ -514,8 +509,8 @@ export default function Header() {
                               {item.numbers?.index1 && item.numbers.index1 !== "" ? item.numbers.index1 : "—"}
                             </span>
                           </td>
-                          <td className="p-3 text-center text-2xl font-bold border">
-                            <span className={`inline-block w-12 h-12 flex items-center justify-center rounded-full ${
+                          <td className="p-2 md:p-3 text-center border">
+                            <span className={`inline-block w-8 h-8 md:w-12 md:h-12 flex items-center justify-center rounded-full text-sm md:text-2xl font-bold ${
                               item.numbers?.index2 && item.numbers.index2 !== "" 
                                 ? 'bg-green-100 text-green-700' 
                                 : 'bg-gray-100 text-gray-400'
@@ -523,8 +518,8 @@ export default function Header() {
                               {item.numbers?.index2 && item.numbers.index2 !== "" ? item.numbers.index2 : "—"}
                             </span>
                           </td>
-                          <td className="p-3 text-center text-2xl font-bold border">
-                            <span className={`inline-block w-12 h-12 flex items-center justify-center rounded-full ${
+                          <td className="p-2 md:p-3 text-center border">
+                            <span className={`inline-block w-8 h-8 md:w-12 md:h-12 flex items-center justify-center rounded-full text-sm md:text-2xl font-bold ${
                               item.numbers?.index3 && item.numbers.index3 !== "" 
                                 ? 'bg-green-100 text-green-700' 
                                 : 'bg-gray-100 text-gray-400'
@@ -532,8 +527,8 @@ export default function Header() {
                               {item.numbers?.index3 && item.numbers.index3 !== "" ? item.numbers.index3 : "—"}
                             </span>
                           </td>
-                          <td className="p-3 text-center text-2xl font-bold border">
-                            <span className={`inline-block w-12 h-12 flex items-center justify-center rounded-full ${
+                          <td className="p-2 md:p-3 text-center border">
+                            <span className={`inline-block w-8 h-8 md:w-12 md:h-12 flex items-center justify-center rounded-full text-sm md:text-2xl font-bold ${
                               item.numbers?.index4 && item.numbers.index4 !== "" 
                                 ? 'bg-green-100 text-green-700' 
                                 : 'bg-gray-100 text-gray-400'
@@ -541,7 +536,7 @@ export default function Header() {
                               {item.numbers?.index4 && item.numbers.index4 !== "" ? item.numbers.index4 : "—"}
                             </span>
                           </td>
-                          <td className="p-3 text-center border">
+                          <td className="p-2 md:p-3 text-center border text-xs md:text-sm">
                             {item.isComplete ? (
                               <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-800">
                                 ✓ Complete
